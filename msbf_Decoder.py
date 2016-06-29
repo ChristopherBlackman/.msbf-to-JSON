@@ -1,5 +1,5 @@
 import os
-
+import json
 class FileType_msbf:
   
 #convert file to data if file exists
@@ -58,14 +58,28 @@ class FileType_msbf:
 			if len(subSlave) != 5:
 				master.remove(subSlave)
 				print "-inconsistent item has been removed!"
-				
+	
+	#saves data to a file in json format
+	def outputToJson (self, outputPath):
+		json_object = json.dumps(self.list,sort_keys=True)
+		print "-saving data"
+		try:
+			f = open(outputPath,"w")
+			f.write(json_object)
+		except IOError as e:
+			print "error writing to file, please check permissions"
+			return
+		print "done"
+		return
+		
 	def toString (self):
 		master = self.list
 		for index in range(len(master)):
 			print "--------------------"
 			for s in master[index]:
 				print "	",s
+		return
 
     
 data = FileType_msbf('/home/chris/Documents/git/mangaStorm/favorites.msbf')
-#data.toString()
+data.outputToJson('/home/chris/Documents/git/mangaStorm/favorites')
