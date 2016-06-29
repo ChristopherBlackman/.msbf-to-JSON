@@ -36,9 +36,9 @@ class FileType_msbf:
 		
 		master = []
 		slave = []
-		
 		string = ""
 		
+		# brings data into list format
 		for index in range(len(readFile)):
 			#sub-cat
 			if ord(readFile[index]) == 9: #tab
@@ -54,6 +54,12 @@ class FileType_msbf:
 				string = string + readFile[index]
 		self.list = master
 		
+		#removes inconsistent data
+		for subSlave in master:
+			if len(subSlave) != 5:
+				master.remove(subSlave)
+				print "-inconsistent item has been removed!"
+				
 	def toString (self):
 		master = self.list
 		for index in range(len(master)):
@@ -63,4 +69,4 @@ class FileType_msbf:
 
     
 data = FileType_msbf('/home/chris/Documents/git/mangaStorm/favorites.msbf')
-data.toString()
+#data.toString()
