@@ -1,5 +1,7 @@
 import os
 import json
+import sys
+
 class FileType_msbf:
   
 #convert file to data if file exists
@@ -80,6 +82,12 @@ class FileType_msbf:
 				print "	",s
 		return
 
-    
-data = FileType_msbf('/home/chris/Documents/git/mangaStorm/favorites.msbf')
-data.outputToJson('/home/chris/Documents/git/mangaStorm/favorites')
+# get arguments and run program
+args = sys.argv
+
+if len(args) != 3:
+	print "!error"
+	print "python msbf_Decoder.py <input file> <output file>"
+else:
+	data = FileType_msbf(args[1])
+	data.outputToJson(args[2])
